@@ -20,7 +20,6 @@ router.post('/login', function(req, res, next) {
     res.end(JSON.stringify({"status":1}));
   }else{
     res.end(JSON.stringify({"status":0}));
-    res.end("login error");
   };
 });
 router.get('/listmanager', function(req, res, next) {
