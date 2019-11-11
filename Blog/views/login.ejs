@@ -111,18 +111,20 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
     $("#login").click(function() {
-        $.get("http://localhost:3000/login",function(data){
-            var dataNews = JSON.parse(data);
-            console.log(dataNews);
-            var username = $("#username").val();
-            var pwd = $("#pwd").val();
-            if(dataNews[0].username == username && dataNews[0].password == pwd){
-                window.location = "http://localhost:3000/list";
-            }else{
-                alert("用户名密码错误！");
+        $.ajax({
+            type: "post",
+            url: "http://localhost:3000/login/",
+            data: {username: $("#username").val(), pwd: $("#pwd").val()},
+            success: function(data) {
+                var dataObj = JSON.parse(data);
+                console.log(dataObj.status);
+                if(dataObj.status) {
+                    window.location = "http://localhost:3000/listmanager";
+                }else{
+                    alert("用户名密码错误！");
+                }
             }
-        })  
+        })
     })
-    
 </script>
 </html>
